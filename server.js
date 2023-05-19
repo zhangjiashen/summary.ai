@@ -23,8 +23,8 @@ app.post('/summary', async (req, res) => {
     // Use the Slack API to retrieve chat history
     const response = await axios.get('https://slack.com/api/conversations.history', {
       params: {
-        token: process.env.YOUR_SLACK_ACCESS_TOKEN,
-        channel: channel_id, // Replace with the appropriate channel ID
+        token: '${ process.env.YOUR_SLACK_ACCESS_TOKEN }',
+        channel: '${ channel_id }, // Replace with the appropriate channel ID
       },
     });
 
@@ -35,8 +35,8 @@ app.post('/summary', async (req, res) => {
 
     // Use the Slack API to send the summary back to the user
     await axios.post('https://slack.com/api/chat.postMessage', {
-      token: process.env.YOUR_SLACK_ACCESS_TOKEN,
-      channel: channel_id,
+      token: '${ process.env.YOUR_SLACK_ACCESS_TOKEN },
+      channel: '${ channel_id },
       text: 'I am Jiashen Zhang',
     });
 
