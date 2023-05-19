@@ -15,7 +15,7 @@ app.post('/summary', async (req, res) => {
   const { channel_id } = req.body;
   
  console.log(`channel id ${channel_id}`);
- console.log(`key ${secrets.YOUR_SLACK_ACCESS_TOKEN}`);
+ console.log(`key ${process.env.YOUR_SLACK_ACCESS_TOKEN}`);
 
 
   try {
