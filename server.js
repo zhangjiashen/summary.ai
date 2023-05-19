@@ -14,7 +14,7 @@ app.post('/summary', async (req, res) => {
     const response = await axios.get('https://slack.com/api/conversations.history', {
       params: {
         token: 'YOUR_SLACK_ACCESS_TOKEN',
-        channel: 'summary-ai', // Replace with the appropriate channel ID
+        channel: 'summary-ai-test', // Replace with the appropriate channel ID
       },
     });
 
