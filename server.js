@@ -12,9 +12,9 @@ app.get('/', (req, res) => {
 // Handle the /summary command
 app.post('/summary', async (req, res) => {
   // Extract necessary information from the request payload
-  const channel_id = req.body.channel_id;
+  const { channel_id } = req.body;
   
-  console.log(req.body)
+  console.log(channel_id)
   
   console.log(`channel id ${{ channel_id }}`)
   
