@@ -17,8 +17,7 @@ app.post('/summary', async (req, res) => {
   console.log(`channel id ${{ channel_id }}`)
   console.log(`chanel id ${ channel_id }}`)
   
-  console.log(`channel id ${{ secrets.YOUR_SLACK_ACCESS_TOKEN }}`)
-  console.log(`chanel id ${ secrets.YOUR_SLACK_ACCESS_TOKEN }}`)
+  console.log(`channel id ${secrets.YOUR_SLACK_ACCESS_TOKEN }`)
 
   try {
     // Use the Slack API to retrieve chat history
