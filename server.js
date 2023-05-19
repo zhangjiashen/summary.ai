@@ -15,10 +15,10 @@ app.post('/summary', async (req, res) => {
   // Extract necessary information from the request payload
   const { channel_id } = req.body;
   
- console.log(`channel id ${channel_id}`);
-//  console.log(`key ${process.env.YOUR_SLACK_ACCESS_TOKEN}`);
+  console.log(`channel id ${channel_id}`);
+  //  console.log(`key ${process.env.YOUR_SLACK_ACCESS_TOKEN}`);
 
-try {
+  try {
   // Use the Slack API to retrieve chat history
   const response = await axios.get('https://slack.com/api/conversations.history', {
     headers: { authorization: `Bearer ${process.env.YOUR_SLACK_ACCESS_USER_TOKEN}` },
@@ -39,10 +39,10 @@ try {
   }, { headers: { authorization: `Bearer ${process.env.YOUR_SLACK_ACCESS_BOT_TOKEN}` } });
 
   res.sendStatus(200);
-} catch (error) {
+  } catch (error) {
   console.error('Error:', error);
   res.sendStatus(500);
-}
+  }
 });
 
 // Start the server
