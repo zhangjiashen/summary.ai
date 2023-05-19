@@ -31,14 +31,13 @@ app.post('/summary', async (req, res) => {
     // Process the chat history and generate a summary
     // const summary = generateSummary(response.data.messages);
     const msg = response.data.messages;
-    console.log(`msg ${{ msg }}`)
-    console.log(`msg ${msg}`)
+    console.log(msg)
 
     // Use the Slack API to send the summary back to the user
     await axios.post('https://slack.com/api/chat.postMessage', {
       token: process.env.YOUR_SLACK_ACCESS_TOKEN,
       channel: channel_id,
-      text: msg,
+      text: 'I am Jiashen Zhang',
     });
 
     res.sendStatus(200);
