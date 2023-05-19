@@ -4,6 +4,11 @@ const axios = require('axios');
 const app = express();
 app.use(express.urlencoded({ extended: true }));
 
+app.get('/', (req, res) => {
+  res.send('Hello, World!');
+});
+
+
 // Handle the /summary command
 app.post('/summary', async (req, res) => {
   // Extract necessary information from the request payload
@@ -21,6 +26,7 @@ app.post('/summary', async (req, res) => {
     // Process the chat history and generate a summary
     // const summary = generateSummary(response.data.messages);
     const summary = response.data.messages;
+    console.log(${summary})
 
     // Use the Slack API to send the summary back to the user
     await axios.post('https://slack.com/api/chat.postMessage', {
