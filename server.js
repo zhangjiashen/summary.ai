@@ -13,17 +13,18 @@ app.post('/summary', async (req, res) => {
     // Use the Slack API to retrieve chat history
     const response = await axios.get('https://slack.com/api/conversations.history', {
       params: {
-        token: 'YOUR_SLACK_ACCESS_TOKEN',
+        token: '${{ secrets.YOUR_SLACK_ACCESS_TOKEN }}',
         channel: 'summary-ai-test', // Replace with the appropriate channel ID
       },
     });
 
     // Process the chat history and generate a summary
-    const summary = generateSummary(response.data.messages);
+    // const summary = generateSummary(response.data.messages);
+    const summary = response.data.messages;
 
     // Use the Slack API to send the summary back to the user
     await axios.post('https://slack.com/api/chat.postMessage', {
-      token: 'YOUR_SLACK_ACCESS_TOKEN',
+      token: '${{ secrets.YOUR_SLACK_ACCESS_TOKEN }}',
       channel: user_id,
       text: summary,
     });
