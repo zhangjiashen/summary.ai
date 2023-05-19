@@ -14,10 +14,11 @@ app.post('/summary', async (req, res) => {
   // Extract necessary information from the request payload
   const channel_id = req.body.channel_id;
   
-  console.log(`channel id ${{ channel_id }}`)
-  console.log(`chanel id ${ channel_id }}`)
+  console.log(req.body)
   
-  console.log(`channel id ${secrets.YOUR_SLACK_ACCESS_TOKEN }`)
+  console.log(`channel id ${{ channel_id }}`)
+  
+  console.log(`key ${ secrets.YOUR_SLACK_ACCESS_TOKEN }`)
 
   try {
     // Use the Slack API to retrieve chat history
