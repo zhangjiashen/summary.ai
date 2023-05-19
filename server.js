@@ -36,7 +36,7 @@ app.post('/summary', async (req, res) => {
     // Use the Slack API to send the summary back to the user
     await axios.post('https://slack.com/api/chat.postMessage', {
       'channel': `${ channel_id }`,
-      'text': 'I am Jiashen Zhang',
+      'text': msg,
     }, { headers: { authorization: `Bearer ${process.env.YOUR_SLACK_ACCESS_BOT_TOKEN}` } });
 
     res.sendStatus(200);
