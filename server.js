@@ -12,27 +12,34 @@ app.get('/', (req, res) => {
 // Handle the /summary command
 app.post('/summary', async (req, res) => {
   // Extract necessary information from the request payload
-  const { text, user_id } = req.body;
+  const { channel_id } = req.body;
+  
+  console.log(`channel id ${{ channel_id }}`)
+  console.log(`chanel id ${ channel_id }}`)
+  
+  console.log(`channel id ${{ secrets.YOUR_SLACK_ACCESS_TOKEN }}`)
+  console.log(`chanel id ${ secrets.YOUR_SLACK_ACCESS_TOKEN }}`)
 
   try {
     // Use the Slack API to retrieve chat history
     const response = await axios.get('https://slack.com/api/conversations.history', {
       params: {
         token: '${{ secrets.YOUR_SLACK_ACCESS_TOKEN }}',
-        channel: 'summary-ai-test', // Replace with the appropriate channel ID
+        channel: '${{ channel_id }}', // Replace with the appropriate channel ID
       },
     });
 
     // Process the chat history and generate a summary
     // const summary = generateSummary(response.data.messages);
-    const summary = response.data.messages;
-    console.log(`${summary}`)
+    const msg = response.data.messages;
+    console.log(`msg ${{ msg }}`)
+    console.log(`msg ${msg}`)
 
     // Use the Slack API to send the summary back to the user
     await axios.post('https://slack.com/api/chat.postMessage', {
       token: '${{ secrets.YOUR_SLACK_ACCESS_TOKEN }}',
-      channel: user_id,
-      text: summary,
+      channel: '${{ channel_id }}',
+      text: '${{ msg }}',
     });
 
     res.sendStatus(200);
