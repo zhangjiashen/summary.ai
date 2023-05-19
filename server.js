@@ -24,7 +24,7 @@ app.post('/summary', async (req, res) => {
     const response = await axios.get('https://slack.com/api/conversations.history', {
       headers: { authorization: `Bearer ${process.env.YOUR_SLACK_ACCESS_USER_TOKEN}` },
       params: {
-        'channel': `${ channel_id }`, // Replace with the appropriate channel ID
+        channel: channel_id, // Replace with the appropriate channel ID
       }
     });
 
