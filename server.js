@@ -18,32 +18,31 @@ app.post('/summary', async (req, res) => {
  console.log(`channel id ${channel_id}`);
 //  console.log(`key ${process.env.YOUR_SLACK_ACCESS_TOKEN}`);
 
+try {
+  // Use the Slack API to retrieve chat history
+  const response = await axios.get('https://slack.com/api/conversations.history', {
+    headers: { authorization: `Bearer ${process.env.YOUR_SLACK_ACCESS_USER_TOKEN}` },
+    params: {
+      channel: channel_id, // Replace with the appropriate channel ID
+    }
+  });
 
-  try {
-    // Use the Slack API to retrieve chat history
-    const response = await axios.get('https://slack.com/api/conversations.history', {
-      headers: { authorization: `Bearer ${process.env.YOUR_SLACK_ACCESS_USER_TOKEN}` },
-      params: {
-        channel: channel_id, // Replace with the appropriate channel ID
-      }
-    });
+  // Process the chat history and generate a summary
+  // const summary = generateSummary(response.data.messages);
+  const msg = response.data;
+  console.log(msg)
 
-    // Process the chat history and generate a summary
-    // const summary = generateSummary(response.data.messages);
-    const msg = response.data;
-    console.log(msg)
+  // Use the Slack API to send the summary back to the user
+  await axios.post('https://slack.com/api/chat.postMessage', {
+    channel: channel_id,
+    text: msg,
+  }, { headers: { authorization: `Bearer ${process.env.YOUR_SLACK_ACCESS_BOT_TOKEN}` } });
 
-    // Use the Slack API to send the summary back to the user
-    await axios.post('https://slack.com/api/chat.postMessage', {
-      'channel': `${ channel_id }`,
-      'text': msg,
-    }, { headers: { authorization: `Bearer ${process.env.YOUR_SLACK_ACCESS_BOT_TOKEN}` } });
-
-    res.sendStatus(200);
-  } catch (error) {
-    console.error('Error:', error);
-    res.sendStatus(500);
-  }
+  res.sendStatus(200);
+} catch (error) {
+  console.error('Error:', error);
+  res.sendStatus(500);
+}
 });
 
 // Start the server
